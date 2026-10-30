@@ -1,0 +1,95 @@
+PLATAFORMA DE STREAMING — TESTES DE INTEGRAÇÃO
+Responsável: Ana Clara Rodrigues de Souza
+
+
+01 — Reprodução e pausa de filme
+[OK] Filme inicia parado
+[OK] Duração em minutos (esperado: 169; obtido: 169)
+Reproduzindo filme: Interestelar
+[OK] Registro retornado para o histórico (esperado: Filme: Interestelar; obtido: Filme: Interestelar)
+[OK] Reprodução altera o estado
+Filme pausado: Interestelar
+[OK] Pausa interrompe a reprodução
+O filme 'Interestelar' nao esta sendo reproduzido.
+[OK] Pausar novamente mantém o estado parado
+[CENÁRIO APROVADO]
+
+02 — Episódios e temporadas de série
+[OK] Construtor copia as temporadas (esperado: 3; obtido: 3)
+Reproduzindo serie: Dark - T1E2
+[OK] Registro de episódio (esperado: Serie: Dark - T1E2; obtido: Serie: Dark - T1E2)
+[OK] Reprodução marca episódio assistido
+[OK] Marcação manual de episódio
+[OK] Marcação repetida não duplica episódios (esperado: 2; obtido: 2)
+Episodio inexistente: T0E1
+[OK] Temporada zero é inválida (esperado: ; obtido: )
+Episodio inexistente: T3E1
+[OK] Temporada inexistente é inválida (esperado: ; obtido: )
+Episodio inexistente: T1E0
+[OK] Episódio zero é inválido (esperado: ; obtido: )
+Episodio inexistente: T2E3
+[OK] Limite de episódios da temporada (esperado: ; obtido: )
+[OK] Marcação inválida preserva outros episódios
+[OK] Temporada inválida retorna lista vazia (esperado: 0; obtido: 0)
+[OK] Listagem não expõe coleção interna (esperado: 3; obtido: 3)
+[CENÁRIO APROVADO]
+
+03 — Criação e manutenção de playlist
+[OK] Nome do usuário (esperado: Ana Clara; obtido: Ana Clara)
+[OK] Nome da playlist criada pelo usuário (esperado: Minha lista; obtido: Minha lista)
+[OK] Playlist inicia vazia (esperado: 0; obtido: 0)
+[OK] Adição preserva ordem e rejeita duplicatas e entradas vazias
+[OK] Remoção de mídia existente
+[OK] Remoção inexistente mantém a lista (esperado: 1; obtido: 1)
+[OK] Consulta retorna cópia da playlist (esperado: 1; obtido: 1)
+[CENÁRIO APROVADO]
+
+04 — Histórico do usuário e reprodução integrada
+[OK] Histórico inicia vazio (esperado: 0; obtido: 0)
+Reproduzindo filme: Interestelar
+Reproduzindo serie: Dark - T1E2
+[OK] Uso da playlist e histórico em ordem de reprodução
+Episodio inexistente: T1E99
+[OK] Reprodução inválida e registros vazios não entram no histórico (esperado: 2; obtido: 2)
+Reproduzindo filme: Interestelar
+[OK] Reassistir gera novo registro (esperado: 3; obtido: 3)
+[OK] Histórico retorna cópia defensiva (esperado: 3; obtido: 3)
+[CENÁRIO APROVADO]
+
+05 — Busca no catálogo
+[OK] Busca parcial sem diferenciar maiúsculas
+[OK] Conteúdo ausente (esperado: 0; obtido: 0)
+[OK] Busca nula (esperado: 0; obtido: 0)
+[OK] Busca vazia (esperado: 0; obtido: 0)
+[OK] Busca só com espaços (esperado: 0; obtido: 0)
+[OK] Resultado da busca não altera o catálogo (esperado: 2; obtido: 2)
+[CENÁRIO APROVADO]
+
+06 — Recomendações por histórico
+[OK] Sem histórico: três primeiros títulos
+[OK] Exclui títulos já assistidos e limita a três
+[OK] Catálogo todo assistido (esperado: 0; obtido: 0)
+[OK] Usuário nulo (esperado: 0; obtido: 0)
+[OK] Catálogo vazio (esperado: 0; obtido: 0)
+[CENÁRIO APROVADO]
+
+07 — Top 10 e proteção do catálogo
+[OK] Catálogo maior que dez é limitado (esperado: 10; obtido: 10)
+[OK] Primeiro título na ordem do catálogo (esperado: Título 1; obtido: Título 1)
+[OK] Décimo título na ordem do catálogo (esperado: Título 10; obtido: Título 10)
+[OK] Construtor e resultado protegem o catálogo (esperado: 10; obtido: 10)
+[OK] Catálogo menor que dez (esperado: 2; obtido: 2)
+[OK] Top 10 vazio (esperado: 0; obtido: 0)
+[CENÁRIO APROVADO]
+
+08 — Favoritos: chamada da API existente
+[CHAMADA OK] Favoritar aceita chamadas sem lançar exceção.
+[LIMITE] Não é possível verificar a lista de favoritos pela API pública atual.
+[CENÁRIO APROVADO]
+
+RESUMO
+Cenários aprovados: 8
+Cenários reprovados: 0
+Verificações aprovadas: 47
+Favoritos: teste de chamada sem exceção; a API não expõe consulta.
+Top 10: valida a ordem do catálogo; não há ranking por visualizações.

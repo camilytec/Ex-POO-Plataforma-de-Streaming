@@ -1,0 +1,66 @@
+@startuml
+title Plataforma de Streaming — Ana Clara Rodrigues de Souza
+skinparam classAttributeIconSize 0
+left to right direction
+class Plataforma {
+  - catalogo: List<string>
+  --
+  + Plataforma(catalogo: List<string>)
+  + BuscarConteudo(termo: string): List<string>
+  + RecomendarPara(usuario: Usuario): List<string>
+  + Top10(): List<string>
+}
+class Usuario {
+  + Nome: string { get; private set; }
+  - playlists: List<Playlist>
+  - favoritos: List<string>
+  - historico: List<string>
+  --
+  + Usuario(nome: string)
+  + CriarPlaylist(nome: string): Playlist
+  + Favoritar(midia: string): void
+  + Historico(): List<string>
+  + RegistrarReproducao(midia: string): void
+}
+class Playlist {
+  + Nome: string { get; private set; }
+  - midias: List<string>
+  --
+  + Playlist(nome: string)
+  + AdicionarMidia(midia: string): void
+  + RemoverMidia(midia: string): void
+  + ListarMidias(): List<string>
+}
+class Filme {
+  + Titulo: string { get; private set; }
+  + Genero: string { get; private set; }
+  + DuracaoMinutos: int { get; private set; }
+  + EstaTocando: bool { get; private set; }
+  --
+  + Filme(titulo: string, genero: string, duracaoMinutos: int)
+  + Reproduzir(): string
+  + Pausar(): void
+  + GetDuracao(): int
+}
+class Serie {
+  + Titulo: string { get; private set; }
+  + Genero: string { get; private set; }
+  - episodiosPorTemporada: List<int>
+  - assistidos: HashSet<string>
+  --
+  + Serie(titulo: string, genero: string, episodiosPorTemporada: List<int>)
+  + ReproduzirEpisodio(temporada: int, episodio: int): string
+  + MarcarComoAssistido(temporada: int, episodio: int): void
+  + ListarEpisodios(temporada: int): List<string>
+}
+Usuario "0..1" -- "0..*" Playlist : playlists
+Plataforma ..> Usuario : usa em RecomendarPara
+note bottom of Playlist
+Mídias são títulos (string),
+sem associação estrutural com Filme ou Serie.
+end note
+note bottom of Plataforma
+Catálogo contém títulos (string).
+Top10 usa a ordem do catálogo.
+end note
+@enduml
